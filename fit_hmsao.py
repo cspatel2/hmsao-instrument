@@ -98,10 +98,10 @@ grat = MisConfig(FL1, FL2, 98.76,
                            [
                      # Hβ, 20nm around 4861
                      MisMosaicFilter(0, 1.8, 24.63, 26.96, [
-                         (4860-50, 4861+50)], name='Hβ'),
+                         (4860-50, 4861+50)], name='4861'),
                      # Hα, 20nm around 6563
                      MisMosaicFilter(
-                         24.63, 1.8, 27.57 - 2.68, 26.96, [(6500-125, 6563+125)], name='Hα'),
+                         24.63, 1.8, 27.57 - 2.68, 26.96, [(6510, 6600)], name='6563'), #true range is 6563-100 -> 6563 +100. Changed here for convience. 
                      # OI, 10nm around 7774
                      MisMosaicFilter(
                          0, 26.96 + 1.8, 8.13, 27.72, [(4300-50, 4300+50)], name='4278'),
@@ -201,6 +201,7 @@ model.store('hmsa_origin_ship.json', True)
 print('Saved instrument model.')
 print('Finished.\n')
 # %%
+
 ret = MisCurveRemover(model)
 # %%
 img = xr.DataArray(np.asarray(allimg).astype(float), 
@@ -209,8 +210,8 @@ img = xr.DataArray(np.asarray(allimg).astype(float),
                    attrs={'unit': 'ADU'})
 # %%
 wls = {
-    'Hβ': 486.1,
-    'Hα': 656.3,
+    'Hb': 486.1,
+    'Ha': 656.3,
     '4278': 427.8,
     '5577': 557.7,
     '6300': 630.0,
